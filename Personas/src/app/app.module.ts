@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { BotonTopComponent } from './boton-top/boton-top.component';
+import { AltaComponent } from './alta/alta.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { BotonTopComponent } from './boton-top/boton-top.component';
     NavbarComponent,
     HomeComponent,
     FooterComponent,
-    BotonTopComponent
+    BotonTopComponent,
+    AltaComponent
   ],
   imports: [
     BrowserModule,
