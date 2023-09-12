@@ -1,1 +1,49 @@
-<p>alta works!</p>
+<div class="container mt-5 mb-5">
+    <h2 class="text-uppercase display-4 text-center">{{ "Formulario alta personas" }}</h2>
+    <h4 class="text-uppercase lead text-center">{{ "Registra una nueva persona en nuestra DB" }}</h4>
+    <div class="mt-5 text-left">
+      <div class="text-center w-50 mx-auto" id="formulario">
+        <form [formGroup]="myForm" (ngSubmit)="rellenarAlta()" novalidate>
+          <div class="form-group mt-3 mb-3">
+            <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" required maxlength="50" placeholder="Nombre">
+          </div>
+          <div class="text-danger" *ngIf="myForm.get('nombre')?.errors && myForm.get('nombre')?.dirty">
+            <p *ngIf="myForm.get('nombre')?.hasError('required')"><small>Campo requerido</small></p>
+            <p *ngIf="myForm.get('nombre')?.hasError('minlength')"><small>Mínimo 3 caracteres</small></p>
+            <p *ngIf="myForm.get('nombre')?.hasError('maxlength')"><small>Máximo 50 caracteres</small></p>
+          </div>
+  
+          <div class="form-group mt-3 mb-3">
+            <input type="text" id="apellido" name="apellido" class="form-control" formControlName="apellido" required maxlength="50" placeholder="Apellido">
+          </div>
+          <div class="text-danger" *ngIf="myForm.get('apellido')?.errors && myForm.get('apellido')?.dirty">
+            <p *ngIf="myForm.get('apellido')?.hasError('required')"><small>Campo requerido</small></p>
+            <p *ngIf="myForm.get('apellido')?.hasError('minlength')"><small>Mínimo 3 caracteres</small></p>
+            <p *ngIf="myForm.get('apellido')?.hasError('maxlength')"><small>Máximo 50 caracteres</small></p>
+          </div>
+  
+          <div class="form-group mt-3 mb-3">
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" formControlName="fechaNacimiento" required placeholder="Fecha Nacimiento">
+          </div>
+          <div class="text-danger" *ngIf="myForm.get('fechaNacimiento')?.errors && myForm.get('fechaNacimiento')?.dirty">
+            <p *ngIf="myForm.get('fechaNacimiento')?.hasError('required')"><small>Campo requerido</small></p>
+            <p *ngIf="myForm.get('fechaNacimiento')?.hasError('pattern')"><small>Formato incorrecto</small></p>
+            <p *ngIf="myForm.get('fechaNacimiento')?.hasError('min')"><small>No puedes más de 100 años.</small></p>
+            <p *ngIf="myForm.get('fechaNacimiento')?.hasError('max')"><small>Tienes que tener más de 16 años para registrarte.</small></p>
+          </div>
+  
+          <div class="form-group mt-3 mb-3">
+            <input type="number" id="telefono" name="telefono" class="form-control" formControlName="telefono" required placeholder="Telefono" onKeyPress="if(this.value.length==9) return false;">
+          </div>
+          <div class="text-danger" *ngIf="myForm.get('telefono')?.errors && myForm.get('telefono')?.dirty">
+            <p *ngIf="myForm.get('telefono')?.hasError('required')"><small>Campo requerido</small></p>
+            <p *ngIf="myForm.get('telefono')?.hasError('minlength')"><small>Mínimo 9 caracteres</small></p>
+            <p *ngIf="myForm.get('telefono')?.hasError('maxlength')"><small>Máximo 25 caracteres</small></p>
+          </div>
+  
+          <button type="submit" class="btn btn-dark mt-3 text-center" [disabled]="myForm.invalid"><i class="bi bi-person-add"></i> Añadir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

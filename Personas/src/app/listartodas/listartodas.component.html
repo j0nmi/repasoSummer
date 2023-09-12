@@ -1,10 +1,10 @@
 <div class="container text-center mt-5 mb-2">
   <h2 class="text-uppercase display-4">{{ "Listado Personas" }}</h2>
   <h4 class="text-uppercase lead">{{ "Nombre - Apellidos - Teléfono - Fecha Nacimiento" }}</h4>
-  
+
   <div class="btn-group mt-3">
-    <button class="btn btn-primary" (click)="mostrarTablaOnClick()"><i class="bi bi-eye"></i> Show</button>
-  <button (click)="ocultarTablaOnClick()" class="btn btn-danger"><i class="bi bi-eye-slash"></i> Hide</button>
+    <button class="btn btn-dark" (click)="mostrarTablaOnClick()"><i class="bi bi-eye"></i> Show</button>
+    <button (click)="ocultarTablaOnClick()" class="btn btn-outline-dark"><i class="bi bi-eye-slash"></i> Hide</button>
   </div>
 
   <div *ngIf="mostrarTabla" class="table-responsive mt-3">

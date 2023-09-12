@@ -1,34 +1,32 @@
 <div class="container text-center mt-5 mb-5">
-    <h2 class="text-uppercase display-4">{{ "Listado Personas filtrado" }}</h2>
-    <h4 class="text-uppercase lead">{{ "10 Ultimos valores +21 años ordenado por nombre" }}</h4>
-      
+  <h2 class="text-uppercase display-4">{{ "Listado Personas filtrado" }}</h2>
+  <h4 class="text-uppercase lead">{{ "10 Ultimos valores +21 años ordenado por nombre" }}</h4>
+
   <div class="btn-group mt-3">
-    <button class="btn btn-primary" (click)="mostrarTablaOnClick()"><i class="bi bi-eye"></i> Show</button>
-  <button (click)="ocultarTablaOnClick()" class="btn btn-danger"><i class="bi bi-eye-slash"></i> Hide</button>
+    <button class="btn btn-dark" (click)="mostrarTablaOnClick()"><i class="bi bi-eye"></i> Show</button>
+    <button (click)="ocultarTablaOnClick()" class="btn btn-outline-dark"><i class="bi bi-eye-slash"></i> Hide</button>
   </div>
 
-    <div *ngIf="mostrarTabla" class="table-responsive mt-3">
-      <table class="table table-striped table-dark">
-        <thead class="text-uppercase">
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Fecha de Nacimiento</th>
-            <th scope="col">Teléfono</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let person of personasFiltro">
-            <td>{{ person.nombre }}</td>
-            <td>{{ person.apellido }}</td>
-            <td>{{ person.telefono }}</td>
-            <td>{{ person.fechaNacimiento }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div *ngIf="mostrarTabla" class="table-responsive mt-3">
+    <table class="table table-striped table-dark">
+      <thead class="text-uppercase">
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Fecha de Nacimiento</th>
+          <th scope="col">Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of personasFiltro">
+          <td>{{ person.nombre }}</td>
+          <td>{{ person.apellido }}</td>
+          <td>{{ person.telefono }}</td>
+          <td>{{ person.fechaNacimiento }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <app-boton-top></app-boton-top>
-  <app-listartodas></app-listartodas>
-  
-  
+</div>
+<app-boton-top></app-boton-top>
+<app-listartodas></app-listartodas>
