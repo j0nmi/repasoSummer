@@ -20,7 +20,6 @@ namespace Repositorio
             return _context.personas.Any(p => p.id == personaId);
         }
 
-
         // Alta persona
         public async Task<Persona> AltaPersona(Persona nuevaPersona)
         {
@@ -54,6 +53,7 @@ namespace Repositorio
             return _context.personas.FirstOrDefault(p => p.id == id);
         }
 
+        // Listado de registros ordenado por nombre, devolviendo los 10 últimos mayores de 21 años
         public async Task<IEnumerable<Persona>> Obtener10()
         {
             var personasMayoresDe21 = await _context.personas.ToListAsync();
