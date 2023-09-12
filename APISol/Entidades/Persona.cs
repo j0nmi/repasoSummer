@@ -22,10 +22,5 @@ namespace Entidades
         [Required(ErrorMessage = "El teléfono es obligatorio")]
         [StringLength(25, ErrorMessage = "El teléfono debe tener como máximo 25 caracteres")]
         public string Telefono { get; set; }
-
-        public Persona()
-        {
-            
-        }
     }
 }

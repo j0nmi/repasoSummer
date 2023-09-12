@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Context; 
 using Entidades;
+using AutoMapper;
+using DTOs;
+using Repositorio;
 
 namespace APIPersonas.Controllers
 {
@@ -10,92 +12,51 @@ namespace APIPersonas.Controllers
     public class PersonasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
+        private readonly IRepositorioPersonas _repositorioPersonas;
 
-        public PersonasController(ApplicationDbContext context)
+        public PersonasController(ApplicationDbContext context, IMapper mapper, IRepositorioPersonas repositorioPersonas)
         {
             _context = context;
+            _mapper = mapper;
+            _repositorioPersonas = repositorioPersonas;
         }
 
         // GET: api/Personas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Persona>>> GetPersonas()
+        public async Task<ActionResult<IEnumerable<PersonaVerDto>>> Index()
         {
-            return await _context.personas.ToListAsync();
+            var listaPersonas = _mapper.Map<List<PersonaVerDto>>(await _repositorioPersonas.ObtenerTodasPersonas());
+            return Ok(listaPersonas);
         }
 
-        // GET: api/Personas/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Persona>> GetPersona(Guid id)
+        // GET: api/Personas/{id}
+        [HttpGet("{id}", Name = "GetPersonas")]
+        public async Task<ActionResult<PersonaVerDto>> GetPersonas([FromRoute] Guid id)
         {
-            var persona = await _context.personas.FindAsync(id);
-
+            var persona = await _repositorioPersonas.ObtenerPersona(id);
             if (persona == null)
             {
                 return NotFound();
             }
-
-            return persona;
+            var personaDto = _mapper.Map<PersonaVerDto>(persona);
+            return Ok(personaDto);
         }
 
         // POST: api/Personas
         [HttpPost]
-        public async Task<ActionResult<Persona>> PostPersona(Persona persona)
+        public async Task<ActionResult<PersonaVerDto>> PostPersona([FromBody] PersonaAltaDto personaDto)
         {
-            _context.personas.Add(persona);
-            await _context.SaveChangesAsync();
+            if (personaDto == null)
+            {
+                return BadRequest("Los datos de la persona son nulos.");
+            }
 
-            return CreatedAtAction("GetPersona", new { id = persona.id }, persona);
-        }
+            var nuevaPersona = _mapper.Map<Persona>(personaDto);
+            var result = await _repositorioPersonas.AltaPersona(nuevaPersona);
+            var resultDto = _mapper.Map<PersonaVerDto>(result);
 
-        // PUT: api/Personas/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPersona(Guid id, Persona persona)
-        //{
-        //    if (id != persona.id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _context.Entry(persona).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!PersonaExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        // DELETE: api/Personas/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeletePersona(Guid id)
-        //{
-        //    var persona = await _context.personas.FindAsync(id);
-        //    if (persona == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.personas.Remove(persona);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        private bool PersonaExists(Guid id)
-        {
-            return _context.personas.Any(persona => persona.id == id);
+            return Ok(personaDto);
         }
     }
 }
