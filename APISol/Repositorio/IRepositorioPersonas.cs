@@ -8,6 +8,7 @@ namespace Repositorio
         Task<Persona> AltaPersona(Persona nuevaPersona);
         Task<IEnumerable<Persona>> ObtenerTodasPersonas();
         Task<Persona> ObtenerPersona(Guid id);
+        Task<IEnumerable<Persona>> Obtener10();
 
     }
 }

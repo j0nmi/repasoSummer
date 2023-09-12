@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repositorio
 {
@@ -52,5 +53,36 @@ namespace Repositorio
 
             return _context.personas.FirstOrDefault(p => p.id == id);
         }
+
+        public async Task<IEnumerable<Persona>> Obtener10()
+        {
+            var personasMayoresDe21 = await _context.personas.ToListAsync();
+
+            var ultimosMayoresDe21 = personasMayoresDe21
+                .Where(p => CalcularEdad(p.FechaNacimiento) > 21)
+                .OrderBy(p => p.Nombre)
+                .TakeLast(10)
+                .ToList();
+
+            return ultimosMayoresDe21;
+        }
+
+
+
+
+        // Calcular Edad Persona
+        private int CalcularEdad(DateTime fechaNacimiento)
+        {
+            DateTime hoy = DateTime.Today;
+            int edad = hoy.Year - fechaNacimiento.Year;
+
+            if (fechaNacimiento > hoy.AddYears(-edad))
+            {
+                edad--;
+            }
+
+            return edad;
+        }
+
     }
 }

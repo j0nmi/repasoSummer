@@ -7,7 +7,7 @@ using Repositorio;
 
 namespace APIPersonas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/personas")]
     [ApiController]
     public class PersonasController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace APIPersonas.Controllers
             _repositorioPersonas = repositorioPersonas;
         }
 
-        // GET: api/Personas
+        // GET: api/personas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PersonaVerDto>>> Index()
         {
@@ -30,7 +30,7 @@ namespace APIPersonas.Controllers
             return Ok(listaPersonas);
         }
 
-        // GET: api/Personas/{id}
+        // GET: api/personas/{id}
         [HttpGet("{id}", Name = "GetPersonas")]
         public async Task<ActionResult<PersonaVerDto>> GetPersonas([FromRoute] Guid id)
         {
@@ -41,6 +41,16 @@ namespace APIPersonas.Controllers
             }
             var personaDto = _mapper.Map<PersonaVerDto>(persona);
             return Ok(personaDto);
+        }
+
+        // GET: api/personas/ultimos10
+        [HttpGet("ultimos10")]
+        public async Task<ActionResult<IEnumerable<PersonaVerDto>>> GetUltimosMayoresDe21()
+        {
+            var ultimosMayoresDe21 = await _repositorioPersonas.Obtener10();
+
+            var ultimosMayoresDe21Dto = _mapper.Map<List<PersonaVerDto>>(ultimosMayoresDe21);
+            return Ok(ultimosMayoresDe21Dto);
         }
 
         // POST: api/Personas
