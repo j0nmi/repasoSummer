@@ -6,17 +6,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListartodasComponent } from './listartodas/listartodas.component';
 import { ListarfiltroComponent } from './listarfiltro/listarfiltro.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { BotonTopComponent } from './boton-top/boton-top.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ListartodasComponent,
-    ListarfiltroComponent
+    ListarfiltroComponent,
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent,
+    BotonTopComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     HttpClientModule
   ],
   providers: [],

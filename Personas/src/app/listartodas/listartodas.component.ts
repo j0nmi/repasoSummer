@@ -11,7 +11,7 @@ export class ListartodasComponent implements OnInit, OnDestroy {
   personas: any[] = [];
   errorMessage: string = '';
   subscription!: Subscription;
-  mostrarTabla: boolean = false;
+  mostrarTabla: boolean = true;
 
   mostrarTablaOnClick() {
     this.mostrarTabla = true;

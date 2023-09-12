@@ -11,7 +11,7 @@ export class ListarfiltroComponent implements OnInit, OnDestroy {
   personasFiltro: any[] = [];
   errorMessage: string = '';
   subscription!: Subscription;
-  mostrarTabla: boolean = false;
+  mostrarTabla: boolean = true;
 
   mostrarTablaOnClick() {
     this.mostrarTabla = true;
