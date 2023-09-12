@@ -68,8 +68,6 @@ namespace Repositorio
         }
 
 
-
-
         // Calcular Edad Persona
         private int CalcularEdad(DateTime fechaNacimiento)
         {

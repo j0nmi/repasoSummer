@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorio", "Repositorio\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{746D17C9-79EF-4AC2-BF67-89F69E6E706B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{24C8E9EF-88F8-4159-889B-BA449EC3698A}"
+	ProjectSection(SolutionItems) = preProject
+		CreacionRegistros.sql = CreacionRegistros.sql
+		ProcedimientoUltimos10.sql = ProcedimientoUltimos10.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
