@@ -1,7 +1,6 @@
 export interface IPersonas {
-    id?: string;
     nombre: string;
     apellido: string;
-    fechaNacimiento: string;
+    fechaNacimiento: Date;
     telefono: string;
   }

@@ -3,7 +3,7 @@
     <h4 class="text-uppercase lead text-center">{{ "Registra una nueva persona en nuestra DB" }}</h4>
     <div class="mt-5 text-left">
       <div class="text-center w-50 mx-auto" id="formulario">
-        <form [formGroup]="myForm" (ngSubmit)="rellenarAlta()" novalidate>
+        <form [formGroup]="myForm" (ngSubmit)="rellenarAlta(myForm)" novalidate>
           <div class="form-group mt-3 mb-3">
             <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" required maxlength="50" placeholder="Nombre">
           </div>

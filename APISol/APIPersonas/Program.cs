@@ -34,11 +34,12 @@ namespace APIPersonas
 
             app.UseHttpsRedirection();
 
-            app.UseCors(builder =>
+            app.UseCors("AllowAll");
+            app.UseCors(policy =>
             {
-                builder.WithOrigins("http://localhost:4200")
-                       .AllowAnyHeader()
-                       .AllowAnyMethod();
+                policy.WithOrigins("http://localhost:4200") // Permite solicitudes desde esta URL 
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
             });
 
             app.UseAuthorization();

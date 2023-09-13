@@ -18,6 +18,8 @@ export class AltaService {
 
   //Realiza el POST de registro
   postRealizarAlta(alta: IPersonas): Observable<any> {
+    console.log(alta);
     return this.http.post(this.altaUrl, alta);
+    
   }
 }
