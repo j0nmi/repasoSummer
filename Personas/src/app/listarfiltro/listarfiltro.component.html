@@ -13,8 +13,8 @@
         <tr>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
-          <th scope="col">Fecha de Nacimiento</th>
           <th scope="col">Teléfono</th>
+          <th scope="col">Fecha de Nacimiento</th>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +22,7 @@
           <td>{{ person.nombre }}</td>
           <td>{{ person.apellido }}</td>
           <td>{{ person.telefono }}</td>
-          <td>{{ person.fechaNacimiento }}</td>
+          <td>{{ person.fechaNacimiento | date:'dd-MM-yyyy' }}</td>
         </tr>
       </tbody>
     </table>

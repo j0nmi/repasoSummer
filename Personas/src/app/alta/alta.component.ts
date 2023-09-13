@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IPersonas } from './personas';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { Guid } from 'guid-typescript';
   styleUrls: ['./alta.component.css']
 })
 
-export class AltaComponent implements OnInit, OnDestroy {
+export class AltaComponent{
   persona: any = {}; 
   resultAlta: string = "";
 
@@ -50,7 +50,6 @@ export class AltaComponent implements OnInit, OnDestroy {
     this.router.navigate(['/lista']);
   }
   
-
   // Realiza el POST enviando el registro rellenado
   postAlta(altaDTO: IPersonas): void {
     this.altaService.postRealizarAlta(altaDTO).subscribe({
@@ -59,10 +58,4 @@ export class AltaComponent implements OnInit, OnDestroy {
       }
     });
   }
-  ngOnInit(): void {
-    
-  }
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }  
 }
