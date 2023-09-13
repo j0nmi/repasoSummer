@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repositorio
 {
-    public class RepositorioPersonas : IRepositorioPersonas 
+    public class RepositorioPersonas : IRepositorioPersonas
     {
 
         private readonly ApplicationDbContext _context;
@@ -14,29 +14,22 @@ namespace Repositorio
             _context = context;
         }
 
-        // Existe persona
-        public bool PersonaExiste(Guid personaId)
-        {
-            return _context.personas.Any(p => p.id == personaId);
-        }
-
         // Alta persona
         public async Task<Persona> AltaPersona(Persona nuevaPersona)
         {
-            if (PersonaExiste(nuevaPersona.id))
+            Persona existePersona = _context.personas.FirstOrDefault(p => p.id == nuevaPersona.id);
+            Persona listaPersona = new Persona();
+            if (existePersona == null)
             {
-                Persona existePersona = _context.personas.First(p => p.id == nuevaPersona.id);
-                existePersona.Nombre = nuevaPersona.Nombre;
-                existePersona.Apellido = nuevaPersona.Apellido;
-                existePersona.FechaNacimiento = nuevaPersona.FechaNacimiento;
-                existePersona.Telefono = nuevaPersona.Telefono;
-            }
-            else
-            {
-                _context.personas.Add(nuevaPersona);
-            }
+                listaPersona.id = Guid.NewGuid().ToString();
+                listaPersona.Nombre = nuevaPersona.Nombre;
+                listaPersona.Apellido = nuevaPersona.Apellido;
+                listaPersona.Telefono = nuevaPersona.Telefono;
+                listaPersona.FechaNacimiento = nuevaPersona.FechaNacimiento;
 
-            _context.SaveChanges();
+                _context.Add(listaPersona);
+                _context.SaveChangesAsync();
+            }
             return nuevaPersona;
         }
 
@@ -47,10 +40,10 @@ namespace Repositorio
         }
 
         // Obtener Una Persona
-        public async Task<Persona> ObtenerPersona(Guid id)
+        public async Task<Persona> ObtenerPersona(string personaId)
         {
 
-            return _context.personas.FirstOrDefault(p => p.id == id);
+            return _context.personas.FirstOrDefault(p => p.id == personaId);
         }
 
         // Listado de registros ordenado por nombre, devolviendo los 10 últimos mayores de 21 años
@@ -61,12 +54,10 @@ namespace Repositorio
             var ultimosMayoresDe21 = personasMayoresDe21
                 .Where(p => CalcularEdad(p.FechaNacimiento) > 21)
                 .OrderBy(p => p.Nombre)
-                .TakeLast(10)
                 .ToList();
 
-            return ultimosMayoresDe21;
+            return ultimosMayoresDe21.TakeLast(10);
         }
-
 
         // Calcular Edad Persona
         private int CalcularEdad(DateTime fechaNacimiento)
@@ -81,6 +72,5 @@ namespace Repositorio
 
             return edad;
         }
-
     }
 }

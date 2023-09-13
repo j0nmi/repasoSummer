@@ -15,7 +15,7 @@ namespace Context.Migrations
                 name: "personas",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -25,12 +25,6 @@ namespace Context.Migrations
                 {
                     table.PrimaryKey("PK_personas", x => x.id);
                 });
-            migrationBuilder.InsertData(
-                table: "personas",
-                columns: new[] { "id", "Nombre", "Apellido", "FechaNacimiento", "Telefono" },
-                values: new object[] { Guid.NewGuid(), "Jon", "Miguel", new DateTime(2002, 10, 21), "640293174" }
-                );
-
         }
 
         /// <inheritdoc />

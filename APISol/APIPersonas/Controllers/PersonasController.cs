@@ -32,7 +32,7 @@ namespace APIPersonas.Controllers
 
         // GET: api/personas/{id}
         [HttpGet("{id}", Name = "GetPersonas")]
-        public async Task<ActionResult<PersonaVerDto>> GetPersonas([FromRoute] Guid id)
+        public async Task<ActionResult<PersonaVerDto>> GetPersonas([FromRoute] string id)
         {
             var persona = await _repositorioPersonas.ObtenerPersona(id);
             if (persona == null)

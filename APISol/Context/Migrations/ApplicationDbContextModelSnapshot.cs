@@ -24,9 +24,8 @@ namespace Context.Migrations
 
             modelBuilder.Entity("Entidades.Persona", b =>
                 {
-                    b.Property<Guid>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Apellido")
                         .IsRequired()
